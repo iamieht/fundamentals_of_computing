@@ -8,7 +8,12 @@ HEIGHT = 200
 # define helper function format that converts time
 # in tenths of seconds into formatted string A:BC.D
 def format(t):
-    pass
+    min = t // 600
+    secs = ((t // 10) % 60) // 10
+    tenths = ((t // 10) % 60) % 10
+    milisecs = t % 10
+    return str(min) + ":" + str(secs) + str(tenths) + ":" + str(milisecs)
+    
     
 # define event handlers for buttons; "Start", "Stop", "Reset"
 def start():
@@ -29,7 +34,7 @@ def tick():
 
 # define draw handler
 def draw(canvas):
-    canvas.draw_text(str(time), [(HEIGHT / 2), (WIDTH / 2)], 24, "White")
+    canvas.draw_text(format(time), [(HEIGHT / 2), (WIDTH / 2)], 24, "White")
     
 # create frame
 frame = simplegui.create_frame("Stopwatch: The Game", 200, 200)
