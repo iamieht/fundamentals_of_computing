@@ -28,7 +28,7 @@ def click():
         total_ticks = 0
 
 # Create frame and timer
-frame = simplegui.create_frame("Counter with buttons", 200, 200)
+frame = simplegui.create_frame("Reflex Tester", 200, 200)
 frame.add_button("Click me", click, 200)
 timer = simplegui.create_timer(10, tick)
 
