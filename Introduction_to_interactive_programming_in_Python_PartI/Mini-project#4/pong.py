@@ -13,6 +13,10 @@ HALF_PAD_WIDTH = PAD_WIDTH / 2
 HALF_PAD_HEIGHT = PAD_HEIGHT / 2
 LEFT = False
 RIGHT = True
+paddle1_pos = (HEIGHT / 2)
+paddle2_pos = (HEIGHT / 2)
+paddle1_vel = 0
+paddle2_vel = 0
 
 # initialize ball_pos and ball_vel for new bal in middle of table
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
@@ -60,7 +64,20 @@ def draw(canvas):
     
     # draw paddles
     
-    # determine whether paddle and ball collide    
+    # determine whether paddle and ball collide
+    if ball_pos[0] <= BALL_RADIUS + PAD_WIDTH:
+        if paddle1_pos - HALF_PAD_HEIGHT <= ball_pos[1] and ball_pos[1] <= paddle1_pos + HALF_PAD_HEIGHT:
+            ball_vel[0] = -ball_vel[0]
+        
+        else:
+            spawn_ball("RIGHT")
+            
+    elif ball_pos[0] >= (WIDTH - 1) - BALL_RADIUS - PAD_WIDTH:
+        if paddle2_pos - HALF_PAD_HEIGHT <= ball_pos[1] and ball_pos[1] <= paddle2_pos + HALF_PAD_HEIGHT:
+            ball_vel[0] = -ball_vel[0]
+        
+        else:
+            spawn_ball("LEFT")
     
     # draw scores
         
