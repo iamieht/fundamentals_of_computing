@@ -19,13 +19,21 @@ RIGHT = True
 def spawn_ball(direction):
     global ball_pos, ball_vel # these are vectors stored as lists
     ball_pos = [WIDTH / 2, HEIGHT / 2]
-    ball_vel = 1
+    ball_vel = [(random.randrange(120/60, 240/60)), (random.randrange(60/60, 180/60)) ] # pixels per second
+  
+    
+    if direction == "RIGHT": # upwards and towards right
+        ball_vel[1] = - ball_vel[1] 
+    elif direction == "LEFT": # upwards and towards left
+        ball_vel[0] = - ball_vel[0]
+        ball_vel[1] = - ball_vel[1]
+        
 
 # define event handlers
 def new_game():
     global paddle1_pos, paddle2_pos, paddle1_vel, paddle2_vel  # these are numbers
     global score1, score2  # these are ints
-    spawn_ball('right')
+    spawn_ball("RIGHT")
     
 def draw(canvas):
     global score1, score2, paddle1_pos, paddle2_pos, ball_pos, ball_vel
@@ -37,14 +45,15 @@ def draw(canvas):
     canvas.draw_line([WIDTH - PAD_WIDTH, 0],[WIDTH - PAD_WIDTH, HEIGHT], 1, "White")
         
     # update ball
-#    ball_pos[0] += ball_vel
-    if ball_pos[1] < HEIGHT - BALL_RADIUS:
-        ball_pos[1] += ball_vel * -1
-    elif ball_pos[1] > HEIGHT - BALL_RADIUS:
-        ball_pos[1] -= ball_vel
-        
-    print ball_pos
-#    ball_pos[1] += ball_vel
+    ball_pos[0] += ball_vel[0]
+    ball_pos[1] += ball_vel[1]
+    # wall collition
+    if ball_pos[1] <= BALL_RADIUS:
+        ball_vel[1] = - ball_vel[1]
+    elif ball_pos[1] >= HEIGHT - BALL_RADIUS:
+        ball_vel[1] = - ball_vel[1]
+    
+    
     # draw ball
     canvas.draw_circle(ball_pos, BALL_RADIUS, 5, 'White', 'White')
     # update paddle's vertical position, keep paddle on the screen
