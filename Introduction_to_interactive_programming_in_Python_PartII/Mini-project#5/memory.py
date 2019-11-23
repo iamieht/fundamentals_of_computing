@@ -5,12 +5,14 @@ import random
 
 # global variables
 cardsDeck = list(range(0,8)) + list(range(0,8))
+cardsDeckExposed = 16 * [True]
 cardSize = [50, 100]
 
 # helper function to initialize globals
 def new_game():
-    global cardsDeck
+    global cardsDeck, cardsDeckExposed
     cardsDeck = list(range(0,8)) + list(range(0,8))
+    cardsDeckExposed = 16 * [True]
     random.shuffle(cardsDeck)
 
      
@@ -23,7 +25,9 @@ def mouseclick(pos):
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
     for idx in range(len(cardsDeck)):
-        canvas.draw_text(str(cardsDeck[idx]), [(idx * cardSize[0] + cardSize[0] / 2), 60], 32, "White")
+        if cardsDeckExposed[idx]:
+            canvas.draw_text(str(cardsDeck[idx]), [(idx * cardSize[0] + cardSize[0] / 2), 60], 32, "White")
+            
         
 
 
