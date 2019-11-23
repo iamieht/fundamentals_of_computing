@@ -3,9 +3,15 @@
 import simplegui
 import random
 
+# global variables
+cardsDeck = list(range(0,8)) + list(range(0,8))
+cardSize = [50, 100]
+
 # helper function to initialize globals
 def new_game():
-    pass  
+    global cardsDeck
+    cardsDeck = list(range(0,8)) + list(range(0,8))
+    random.shuffle(cardsDeck)
 
      
 # define event handlers
@@ -16,7 +22,9 @@ def mouseclick(pos):
                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-    pass
+    for idx in range(len(cardsDeck)):
+        canvas.draw_text(str(cardsDeck[idx]), [(idx * cardSize[0] + cardSize[0] / 2), 60], 32, "White")
+        
 
 
 # create frame and add a button and labels
