@@ -15,6 +15,9 @@ class Tile(object):
     def hide_tile(self):
         self.exposed = False
 
+    def __str__(self):
+        return "Number is " + str(self.number) + ", " + "exposed is " + str(self.exposed) 
+
     
 
 
