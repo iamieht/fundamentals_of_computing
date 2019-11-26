@@ -68,7 +68,12 @@ class Tile:
         inside_vert = self.location[1] - TILE_HEIGHT <= pos[1] <= self.location[1]
         return  inside_hor and inside_vert     
        
-            
+
+def mouseclick(pos):
+    for tile in my_tiles:
+        if tile.is_selected(pos):
+            tile.expose_tile()
+
 # draw handler
 def draw(canvas):
     for tile in my_tiles:
@@ -80,6 +85,7 @@ frame = simplegui.create_frame("Memory", 2 * DISTINCT_TILES * TILE_WIDTH, TILE_H
 frame.add_button("Restart", new_game)
 label = frame.add_label("Turns = 0")
 frame.set_draw_handler(draw)
+frame.set_mouseclick_handler(mouseclick)
 
 # get things rolling
 new_game()
