@@ -47,22 +47,29 @@ class Bubble:
             
     def draw(self, canvas):
         pass
-        
+     
 
 # define keyhandlers to control firing_angle
 def keydown(key):
     global a_bubble, firing_angle_vel, bubble_stuck
-    pass
+    if simplegui.KEY_MAP["left"] == key:
+        firing_angle_vel += FIRING_ANGLE_VEL_INC
+    elif simplegui.KEY_MAP["right"] == key:
+        firing_angle_vel -= FIRING_ANGLE_VEL_INC
 
 def keyup(key):
     global firing_angle_vel
-    pass
+    if simplegui.KEY_MAP["left"] == key:
+        firing_angle_vel -= FIRING_ANGLE_VEL_INC
+    elif simplegui.KEY_MAP["right"] == key:
+        firing_angle_vel += FIRING_ANGLE_VEL_INC
     
 # define draw handler
 def draw(canvas):
     global firing_angle, a_bubble, bubble_stuck
     
     # update firing angle
+    firing_angle += firing_angle_vel
     
     #draw firing line
     orient = angle_to_vector(firing_angle)
